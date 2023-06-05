@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
 
 class MyAppState extends ChangeNotifier {
   var activities = <Activity>[
-    Activity(title: 'Bowling and Brewskies', sport: 'Bowling', date: DateTime.now(), coordinates: [0.0,0.0], creator: 'Torri Porter')
+    Activity(title: 'Bowling and Brewskies', sport: 'Bowling', date: DateTime.now(), coordinates: [0.0,0.0], creator: 'Torri Porter'),
+    Activity(title: 'Blacktop Basketball', sport: 'Basketball', date: DateTime.now(), coordinates: [0.0,0.0], creator: 'Lauren Lanning')
   ];
 }

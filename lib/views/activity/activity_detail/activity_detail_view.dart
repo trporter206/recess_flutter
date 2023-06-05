@@ -44,6 +44,16 @@ class ActivityDetailViewState extends State<ActivityDetailView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: const Text(
+          'Activity',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.white
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
@@ -53,7 +63,10 @@ class ActivityDetailViewState extends State<ActivityDetailView> {
             // ),
             PlayerProfileLink(activity: widget.activity, userInfo: userInfo),
             ActivityDescription(activity: widget.activity),
-            // Divider(),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8.0),
+              child: Divider(color: Colors.black),
+            ),
             ActivityStatus(activity: widget.activity),
             ActivityPlayerList(playerList: playerList),
             ActivityDateView(activity: widget.activity),

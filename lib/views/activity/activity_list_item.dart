@@ -37,7 +37,7 @@ class ActivityListItemState extends State<ActivityListItem> {
               children: <Widget>[
                 const CircleAvatar(
                   radius: 37.5,
-                  backgroundColor: Colors.blue,
+                  backgroundColor: Colors.red,
                   child: Icon(Icons.location_on),
                 ),
                 const SizedBox(width: 10),

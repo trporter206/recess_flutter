@@ -8,7 +8,7 @@ class PlayerProfileLink extends StatefulWidget {
   final User userInfo;
 
   const PlayerProfileLink({
-    super.key, 
+    super.key,
     required this.activity,
     required this.userInfo,
   });
@@ -21,7 +21,7 @@ class _PlayerProfileLinkState extends State<PlayerProfileLink> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 8.0),
+      padding: const EdgeInsets.all(8.0),
       child: Row(
         children: <Widget>[
           GestureDetector(
@@ -31,7 +31,11 @@ class _PlayerProfileLinkState extends State<PlayerProfileLink> {
               //   MaterialPageRoute(builder: (context) => PlayerProfile(testData: testData, userInfo: userInfo)),
               // );
             },
-            child: ProfilePicView(profileString: widget.userInfo.profilePicString, height: 90),
+            child: const CircleAvatar(
+              radius: 37.5,
+              backgroundColor: Colors.red,
+              child: Icon(Icons.location_on),
+            ),
           ),
           const SizedBox(width: 10),
           Column(
@@ -49,7 +53,9 @@ class _PlayerProfileLinkState extends State<PlayerProfileLink> {
                 widget.activity.sport,
                 style: TextStyle(
                   fontSize: 16,
-                  fontWeight: widget.activity.title != "" ? FontWeight.normal : FontWeight.bold,
+                  fontWeight: widget.activity.title != ""
+                      ? FontWeight.normal
+                      : FontWeight.bold,
                 ),
               ),
               Text(
@@ -80,13 +86,14 @@ class ActivityDescription extends StatelessWidget {
         child: Text(
           activity.description,
           style: const TextStyle(
-            color: Colors.blue,  // Replace with your color code
+            color: Colors.blue, // Replace with your color code
             fontWeight: FontWeight.w300,
           ),
         ),
       );
     } else {
-      return const SizedBox.shrink();  // Returns an empty container if description is empty
+      return const SizedBox
+          .shrink(); // Returns an empty container if description is empty
     }
   }
 }
@@ -140,7 +147,8 @@ class ActivityPlayerList extends StatelessWidget {
             padding: const EdgeInsets.only(left: 16.0),
             child: Row(
               children: playerList.map((player) {
-                return ProfilePicView(profileString: player.profilePicString, height: 60);
+                return ProfilePicView(
+                    profileString: player.profilePicString, rad: 30.0);
               }).toList(),
             ),
           ),
@@ -172,22 +180,17 @@ class ActivityDateView extends StatelessWidget {
 
 class ProfilePicView extends StatelessWidget {
   final String profileString;
-  final int height;
+  final double rad;
 
-  const ProfilePicView({super.key, required this.profileString, required this.height});
+  const ProfilePicView(
+      {super.key, required this.profileString, required this.rad});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.parse(height.toString()),
-      height: double.parse(height.toString()),
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        image: DecorationImage(
-          fit: BoxFit.fill,
-          image: NetworkImage(profileString),
-        ),
-      ),
+    return CircleAvatar(
+      radius: rad,
+      backgroundColor: Colors.red,
+      child: const Icon(Icons.location_on),
     );
   }
 }
