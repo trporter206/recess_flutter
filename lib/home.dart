@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:recess_flutter/main.dart';
-import 'package:recess_flutter/views/activity/activity_detail/activity_detail_view.dart';
 import 'package:recess_flutter/views/activity/activity_list/activity_list_view.dart';
+import 'package:recess_flutter/views/club/club_list/club_list_view.dart';
 import 'package:recess_flutter/views/creation/create_activity.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -19,8 +17,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    var appState = context.watch<MyAppState>();
-    var activity = appState.activities[0];
     Widget page;
     switch (selectedIndex) {
       case 0:
@@ -28,6 +24,9 @@ class _MyHomePageState extends State<MyHomePage> {
         break;
       case 1:
         page = const ActivityListView();
+        break;
+      case 2:
+        page = const ClubListView();
         break;
       default:
         throw UnimplementedError('no widget for $selectedIndex');
@@ -48,6 +47,10 @@ class _MyHomePageState extends State<MyHomePage> {
               BottomNavigationBarItem(
                 icon: Icon(Icons.list),
                 label: 'Activities',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.list),
+                label: 'Clubs',
               ),
             ],
             currentIndex: selectedIndex,

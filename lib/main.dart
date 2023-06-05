@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:recess_flutter/models/user.dart';
 import 'home.dart';
 import 'models/activity.dart';
+import 'models/club.dart';
 
 void main() {
   runApp(const MyApp());
@@ -45,5 +46,13 @@ class MyAppState extends ChangeNotifier {
         date: DateTime.now(),
         coordinates: [0.0, 0.0],
         creator: 'Lauren Lanning')
+  ];
+  var clubs = <Club>[
+    Club(
+      creator: 'Torri Porter', 
+      name: 'Underdog Portland Basketball', 
+      sport: 'Basketball', 
+      type: 'private', 
+      description: 'The official basketball club of underdog portland!')
   ];
 }

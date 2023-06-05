@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../models/activity.dart';
-import '../../../models/user.dart';
 import 'activity_detail_widgets.dart';
 
 class ActivityDetailView extends StatefulWidget {
