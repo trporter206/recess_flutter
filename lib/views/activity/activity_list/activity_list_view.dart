@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:recess_flutter/views/activity/activity_list_item.dart';
+import 'package:recess_flutter/views/activity/activity_list/activity_list_item.dart';
 
-import '../../main.dart';
-import '../../models/activity.dart';
+import '../../../main.dart';
+import '../../../models/activity.dart';
 
 class ActivityListView extends StatefulWidget {
   const ActivityListView({Key? key}) : super(key: key);

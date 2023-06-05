@@ -84,7 +84,7 @@ class ActivityDescription extends StatelessWidget {
         child: Text(
           activity.description,
           style: const TextStyle(
-            color: Colors.blue, // Replace with your color code
+            color: Colors.white, // Replace with your color code
             fontWeight: FontWeight.w300,
           ),
         ),

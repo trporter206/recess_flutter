@@ -43,6 +43,8 @@ class ActivityDetailViewState extends State<ActivityDetailView> {
   Widget build(BuildContext context) {
     Activity activity = widget.activity;
     bool joined = activity.players.contains("Torri Porter");
+    bool areCreator = activity.creator == "Torri Porter";
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -54,10 +56,6 @@ class ActivityDetailViewState extends State<ActivityDetailView> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            // Container(
-            //   height: 260,
-            //   child: ActivityMapView(coordinate: Coordinates(activity.coordinates[0], activity.coordinates[1])),
-            // ),
             PlayerProfileLink(activity: activity),
             ActivityDescription(activity: activity),
             const Padding(
@@ -65,7 +63,7 @@ class ActivityDetailViewState extends State<ActivityDetailView> {
               child: Divider(color: Colors.black),
             ),
             ActivityStatus(activity: activity),
-            Container(
+            SizedBox(
               height: 200, // adjust this value as needed
               child: ListView(
                   children: activity.players.map((String player) {
@@ -73,20 +71,29 @@ class ActivityDetailViewState extends State<ActivityDetailView> {
               }).toList()),
             ),
             ActivityDateView(activity: activity),
-            ElevatedButton(
-              onPressed: () {
-                if (joined) {
-                  activity.removePlayer("Torri Porter");
-                } else {
-                  activity.addPlayer("Torri Porter");
-                }
-                setState(() {
-                  joined = !joined;
-                });
-              },
-              child: Text(joined ? "Leave" : "Join"),
-            ),
-            // ActivityActionButtonView(activity: activity),
+            areCreator 
+              ? ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      activity.currentlyActive = !activity.currentlyActive;
+                    });
+                  },
+                  child: Text(activity.currentlyActive ? "End" : "Start"),
+                )
+              : ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      if (joined) {
+                        activity.removePlayer("Torri Porter");
+                        joined = false;
+                      } else {
+                        activity.addPlayer("Torri Porter");
+                        joined = true;
+                      }
+                    });
+                  },
+                  child: Text(joined ? "Leave" : "Join"),
+                ),
             const Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
@@ -100,5 +107,4 @@ class ActivityDetailViewState extends State<ActivityDetailView> {
       backgroundColor: Colors.lightBlueAccent,
     );
   }
-
 }

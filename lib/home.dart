@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recess_flutter/main.dart';
 import 'package:recess_flutter/views/activity/activity_detail/activity_detail_view.dart';
-import 'package:recess_flutter/views/activity/activity_list_view.dart';
+import 'package:recess_flutter/views/activity/activity_list/activity_list_view.dart';
+import 'package:recess_flutter/views/creation/create_activity.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -23,7 +24,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Widget page;
     switch (selectedIndex) {
       case 0:
-        page = ActivityDetailView(activity: activity);
+        page = const CreateActivityView();
         break;
       case 1:
         page = const ActivityListView();

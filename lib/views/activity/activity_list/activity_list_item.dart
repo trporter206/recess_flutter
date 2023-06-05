@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:recess_flutter/views/activity/activity_detail/activity_detail_view.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
-import '../../models/activity.dart';
+import '../../../models/activity.dart';
 
 class ActivityListItem extends StatefulWidget {
   final Activity activity;

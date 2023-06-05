@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:recess_flutter/models/user.dart';
 import 'home.dart';
 import 'models/activity.dart';
 
@@ -27,8 +28,22 @@ class MyApp extends StatelessWidget {
 }
 
 class MyAppState extends ChangeNotifier {
+  var currentUser = User(
+      name: "Torri Porter",
+      emailAddress: 'torri@email.com',
+      profilePicString: 'a1');
   var activities = <Activity>[
-    Activity(title: 'Bowling and Brewskies', sport: 'Bowling', date: DateTime.now(), coordinates: [0.0,0.0], creator: 'Torri Porter'),
-    Activity(title: 'Blacktop Basketball', sport: 'Basketball', date: DateTime.now(), coordinates: [0.0,0.0], creator: 'Lauren Lanning')
+    Activity(
+        title: 'Bowling and Brewskies',
+        sport: 'Bowling',
+        date: DateTime.now(),
+        coordinates: [0.0, 0.0],
+        creator: 'Torri Porter'),
+    Activity(
+        title: 'Blacktop Basketball',
+        sport: 'Basketball',
+        date: DateTime.now(),
+        coordinates: [0.0, 0.0],
+        creator: 'Lauren Lanning')
   ];
 }
