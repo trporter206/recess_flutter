@@ -5,12 +5,10 @@ import '../../../models/user.dart';
 
 class PlayerProfileLink extends StatefulWidget {
   final Activity activity;
-  final User userInfo;
 
   const PlayerProfileLink({
     super.key,
     required this.activity,
-    required this.userInfo,
   });
 
   @override
@@ -59,7 +57,7 @@ class _PlayerProfileLinkState extends State<PlayerProfileLink> {
                 ),
               ),
               Text(
-                "Hosted by ${widget.userInfo.name}",
+                "Hosted by ${widget.activity.creator}",
                 style: const TextStyle(
                   fontSize: 14,
                   color: Colors.blue,
@@ -111,7 +109,7 @@ class ActivityStatus extends StatelessWidget {
         child: Text(
           "Currently Active",
           style: TextStyle(
-            color: Colors.blue, // Replace with your color code
+            color: Colors.orange, // Replace with your color code
             fontWeight: FontWeight.bold,
           ),
         ),

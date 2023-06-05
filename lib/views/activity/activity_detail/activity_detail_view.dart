@@ -5,17 +5,15 @@ import 'activity_detail_widgets.dart';
 
 class ActivityDetailView extends StatefulWidget {
   final Activity activity;
-  const ActivityDetailView({super.key,  required this.activity });
+  const ActivityDetailView({super.key, required this.activity});
 
   @override
   ActivityDetailViewState createState() => ActivityDetailViewState();
 }
 
 class ActivityDetailViewState extends State<ActivityDetailView> {
-  User userInfo = User(name: "Torri Porter", emailAddress: 'torri@email.com', profilePicString: "pic1");
-    List<User> playerList = [];
-    // bool showingReviewSheet = false;
-    // bool showingAlert = false;
+  // bool showingReviewSheet = false;
+  // bool showingAlert = false;
 
   @override
   void initState() {
@@ -43,15 +41,14 @@ class ActivityDetailViewState extends State<ActivityDetailView> {
 
   @override
   Widget build(BuildContext context) {
+    Activity activity = widget.activity;
+    bool joined = activity.players.contains("Torri Porter");
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text(
           'Activity',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.white
-          ),
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
       ),
       body: SingleChildScrollView(
@@ -59,23 +56,42 @@ class ActivityDetailViewState extends State<ActivityDetailView> {
           children: <Widget>[
             // Container(
             //   height: 260,
-            //   child: ActivityMapView(coordinate: Coordinates(widget.activity.coordinates[0], widget.activity.coordinates[1])),
+            //   child: ActivityMapView(coordinate: Coordinates(activity.coordinates[0], activity.coordinates[1])),
             // ),
-            PlayerProfileLink(activity: widget.activity, userInfo: userInfo),
-            ActivityDescription(activity: widget.activity),
+            PlayerProfileLink(activity: activity),
+            ActivityDescription(activity: activity),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 8.0),
               child: Divider(color: Colors.black),
             ),
-            ActivityStatus(activity: widget.activity),
-            ActivityPlayerList(playerList: playerList),
-            ActivityDateView(activity: widget.activity),
-            // ActivityActionButtonView(activity: widget.activity, playerList: playerList),
+            ActivityStatus(activity: activity),
+            Container(
+              height: 200, // adjust this value as needed
+              child: ListView(
+                  children: activity.players.map((String player) {
+                return Text(player);
+              }).toList()),
+            ),
+            ActivityDateView(activity: activity),
+            ElevatedButton(
+              onPressed: () {
+                if (joined) {
+                  activity.removePlayer("Torri Porter");
+                } else {
+                  activity.addPlayer("Torri Porter");
+                }
+                setState(() {
+                  joined = !joined;
+                });
+              },
+              child: Text(joined ? "Leave" : "Join"),
+            ),
+            // ActivityActionButtonView(activity: activity),
             const Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                // EditActivityButton(activity: widget.activity),
-                // ActivityDeleteButton(activity: widget.activity),
+                // EditActivityButton(activity: activity),
+                // ActivityDeleteButton(activity: activity),
               ],
             ),
           ],
@@ -84,6 +100,5 @@ class ActivityDetailViewState extends State<ActivityDetailView> {
       backgroundColor: Colors.lightBlueAccent,
     );
   }
+
 }
-
-
