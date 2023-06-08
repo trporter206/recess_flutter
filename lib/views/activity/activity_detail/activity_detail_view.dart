@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:recess_flutter/main.dart';
 import '../../../models/activity.dart';
 import 'activity_detail_widgets.dart';
 
@@ -16,6 +18,7 @@ class ActivityDetailViewState extends State<ActivityDetailView> {
 
   @override
   Widget build(BuildContext context) {
+    var appState = context.watch<MyAppState>();
     Activity activity = widget.activity;
     bool joined = activity.players.contains("Torri Porter");
     bool areCreator = activity.creator == "Torri Porter";
@@ -46,29 +49,31 @@ class ActivityDetailViewState extends State<ActivityDetailView> {
               }).toList()),
             ),
             ActivityDateView(activity: activity),
-            areCreator 
-              ? ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      activity.currentlyActive = !activity.currentlyActive;
-                    });
-                  },
-                  child: Text(activity.currentlyActive ? "End" : "Start"),
-                )
-              : ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      if (joined) {
-                        activity.removePlayer("Torri Porter");
-                        joined = false;
-                      } else {
-                        activity.addPlayer("Torri Porter");
-                        joined = true;
-                      }
-                    });
-                  },
-                  child: Text(joined ? "Leave" : "Join"),
-                ),
+            areCreator
+                ? ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        activity.currentlyActive = !activity.currentlyActive;
+                      });
+                    },
+                    child: Text(activity.currentlyActive ? "End" : "Start"),
+                  )
+                : ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        if (joined) {
+                          appState.removePlayerFromActivity(
+                              "Torri Porter", activity);
+                          joined = false;
+                        } else {
+                          appState.addPlayerToActivity(
+                              "Torri Porter", activity);
+                          joined = true;
+                        }
+                      });
+                    },
+                    child: Text(joined ? "Leave" : "Join"),
+                  ),
             const Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[

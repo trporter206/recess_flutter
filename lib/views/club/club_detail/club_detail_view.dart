@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../../main.dart';
 import '../../../models/club.dart';
 
 class ClubDetailView extends StatefulWidget {
@@ -13,6 +15,7 @@ class ClubDetailView extends StatefulWidget {
 class ClubDetailViewState extends State<ClubDetailView> {
   @override
   Widget build(BuildContext context) {
+    var appState = context.watch<MyAppState>();
     Club club = widget.club;
     bool joined = club.members.contains('Torri Porter');
     bool areCreator = club.creator == 'Torri Porter';
@@ -26,32 +29,30 @@ class ClubDetailViewState extends State<ClubDetailView> {
         ),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Text(club.name),
-            Text(club.creator),
-            Text(club.description),
-            !areCreator 
+        child: Column(children: [
+          Text(club.name),
+          Text(club.creator),
+          Text(club.description),
+          !areCreator
               ? ElevatedButton(
                   onPressed: () {
                     setState(() {
                       if (joined) {
-                        club.removeMember("Torri Porter");
+                        appState.removeMemberFromClub("Torri Porter", club);
                         joined = false;
                       } else {
-                        club.addMember("Torri Porter");
+                        appState.addMemberToClub("Torri Porter", club);
                         joined = true;
                       }
                     });
                   },
                   child: Text(joined ? "Leave" : "Join"),
-                ) : 
-                const Text('Welcome to your club'),
-            club.type == 'private'
-            ? Text(club.howToJoin) 
-            : const Text('Anyone can join this club')
-          ]
-        ),
+                )
+              : const Text('Welcome to your club'),
+          club.type == 'private'
+              ? Text(club.howToJoin)
+              : const Text('Anyone can join this club')
+        ]),
       ),
     );
   }

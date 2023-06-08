@@ -24,12 +24,31 @@ class MyApp extends StatelessWidget {
             useMaterial3: true,
           ),
           home: const MyHomePage(title: 'Recess'),
-        )
-    );
+        ));
   }
 }
 
 class MyAppState extends ChangeNotifier {
+  void addPlayerToActivity(String playerId, Activity activity) {
+    activity.addPlayer(playerId);
+    notifyListeners();
+  }
+
+  void removePlayerFromActivity(String playerId, Activity activity) {
+    activity.removePlayer(playerId);
+    notifyListeners();
+  }
+
+  void addMemberToClub(String userId, Club club) {
+    club.addMember(userId);
+    notifyListeners();
+  }
+
+  void removeMemberFromClub(String userId, Club club) {
+    club.removeMember(userId);
+    notifyListeners();
+  }
+
   var sports = ['Basketball', 'Soccer', 'Volleyball'];
   var type = ['public', 'private'];
   var currentUser = User(
