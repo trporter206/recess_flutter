@@ -1,31 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recess_flutter/main.dart';
-import '../../models/activity.dart';
 
-class CreateActivityView extends StatefulWidget {
-  const CreateActivityView({super.key});
+import '../../models/club.dart';
+
+class CreateClubView extends StatefulWidget {
+  const CreateClubView({Key? key}) : super(key: key);
 
   @override
-  CreateActivityViewState createState() => CreateActivityViewState();
+  CreateClubState createState() => CreateClubState();
 }
 
-class CreateActivityViewState extends State<CreateActivityView> {
+class CreateClubState extends State<CreateClubView> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  String title = '';
+  String name = '';
   String sport = '';
+  String type = '';
   String description = '';
-  DateTime date = DateTime.now();
-  List<double> coordinates = [0.0, 0.0]; // update this as per your requirement
 
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
-    var activities = appState.activities;
+    var clubs = appState.clubs;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Create Activity'),
+        title: const Text('Create Club'),
       ),
       body: Form(
         key: _formKey,
@@ -34,13 +34,13 @@ class CreateActivityViewState extends State<CreateActivityView> {
           child: Column(
             children: [
               TextFormField(
-                decoration: const InputDecoration(labelText: 'Title'),
+                decoration: const InputDecoration(labelText: 'Name'),
                 onSaved: (value) {
-                  title = value!;
+                  name = value!;
                 },
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'Please enter a title';
+                    return 'Please enter a name';
                   }
                   return null;
                 },
@@ -66,6 +66,27 @@ class CreateActivityViewState extends State<CreateActivityView> {
                   return null;
                 },
               ),
+              DropdownButtonFormField(
+                decoration: const InputDecoration(labelText: 'Type'),
+                value: type.isEmpty ? null : type,
+                items: appState.type.map((String type) {
+                  return DropdownMenuItem(
+                    value: type,
+                    child: Text(type),
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    type = value.toString();
+                  });
+                },
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please select a type';
+                  }
+                  return null;
+                },
+              ),
               TextFormField(
                 decoration: const InputDecoration(labelText: 'Description'),
                 onSaved: (value) {
@@ -76,11 +97,10 @@ class CreateActivityViewState extends State<CreateActivityView> {
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
-                    activities.add(Activity(
-                      title: title,
+                    clubs.add(Club(
+                      name: name,
+                      type: type,
                       sport: sport,
-                      date: date,
-                      coordinates: coordinates,
                       description: description,
                       creator: appState.currentUser.name,
                     ));

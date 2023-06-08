@@ -29,6 +29,8 @@ class MyApp extends StatelessWidget {
 }
 
 class MyAppState extends ChangeNotifier {
+  var sports = ['Basketball', 'Soccer', 'Volleyball'];
+  var type = ['public', 'private'];
   var currentUser = User(
       name: "Torri Porter",
       emailAddress: 'torri@email.com',
@@ -49,10 +51,10 @@ class MyAppState extends ChangeNotifier {
   ];
   var clubs = <Club>[
     Club(
-      creator: 'Torri Porter', 
-      name: 'Underdog Portland Basketball', 
-      sport: 'Basketball', 
-      type: 'private', 
-      description: 'The official basketball club of underdog portland!')
+        creator: 'Torri Porter',
+        name: 'Underdog Portland Basketball',
+        sport: 'Basketball',
+        type: 'private',
+        description: 'The official basketball club of underdog portland!')
   ];
 }

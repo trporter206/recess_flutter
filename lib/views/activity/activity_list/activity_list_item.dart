@@ -16,7 +16,6 @@ class ActivityListItemState extends State<ActivityListItem> {
   @override
   Widget build(BuildContext context) {
     var activity = widget.activity;
-    // var formattedDate = DateFormat('MMM d, h:mma').format(activity.date);
     return InkWell(
       onTap: () {
         Navigator.push(
@@ -27,44 +26,52 @@ class ActivityListItemState extends State<ActivityListItem> {
         );
       },
       child: Card(
-        shape:  RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
         child: SizedBox(
           width: 360,
           height: 75,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                const CircleAvatar(
-                  radius: 37.5,
-                  backgroundColor: Colors.red,
-                  child: Icon(Icons.location_on),
-                ),
-                const SizedBox(width: 10),
-                Column(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              const CircleAvatar(
+                radius: 37.5,
+                backgroundColor: Colors.red,
+                child: Icon(Icons.location_on),
+              ),
+              const SizedBox(width: 10),
+              Flexible(  // This is the new line
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       activity.title,
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 24,
+                        fontSize: 20,
                       ),
+                      overflow: TextOverflow.ellipsis,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        const Icon(Icons.person_3_rounded),
-                        Text('${activity.playerCount}'),
+                        const Icon(Icons.person),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 8.0),
+                          child: Text('${activity.playerCount}'),
+                        ),
                         const Icon(Icons.calendar_month_rounded),
                         Text('${activity.date.weekday}')
                       ],
-                    )
+                    ),
                   ],
-                )
-              ],
-            ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
+

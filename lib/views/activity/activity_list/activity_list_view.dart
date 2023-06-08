@@ -21,13 +21,27 @@ class ActivityListViewState extends State<ActivityListView> {
     activities = appState.activities;
 
     return Scaffold(
-        body: ListView(
-          children: activities.map((Activity activity) {
-            return Center(
-              child: ActivityListItem(activity: activity),
-            );
-          }).toList(),
-        ),
+        body: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                'Activities: ${activities.length}',
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+            Expanded(
+              child: ListView(
+                children: activities.map((Activity activity) {
+                  return Center(
+                    child: ActivityListItem(activity: activity),
+                  );
+                }).toList(),
+              ),
+            )
+          ],
+        )
     );
   }
 }
+

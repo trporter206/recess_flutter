@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recess_flutter/views/activity/activity_list/activity_list_view.dart';
 import 'package:recess_flutter/views/club/club_list/club_list_view.dart';
-import 'package:recess_flutter/views/creation/create_activity.dart';
+import 'package:recess_flutter/views/dashboard.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -20,7 +20,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Widget page;
     switch (selectedIndex) {
       case 0:
-        page = const CreateActivityView();
+        page = const Dashboard();
         break;
       case 1:
         page = const ActivityListView();
