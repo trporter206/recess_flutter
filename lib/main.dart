@@ -29,6 +29,11 @@ class MyApp extends StatelessWidget {
 }
 
 class MyAppState extends ChangeNotifier {
+  
+  bool isMemberOfClub(String userId, Club club) {
+    return club.members.contains(userId);
+  }
+
   void addPlayerToActivity(String playerId, Activity activity) {
     activity.addPlayer(playerId);
     notifyListeners();

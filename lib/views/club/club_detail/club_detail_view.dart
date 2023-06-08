@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:recess_flutter/widgets/buttons.dart';
 
-import '../../../main.dart';
 import '../../../models/club.dart';
 
 class ClubDetailView extends StatefulWidget {
@@ -15,9 +14,8 @@ class ClubDetailView extends StatefulWidget {
 class ClubDetailViewState extends State<ClubDetailView> {
   @override
   Widget build(BuildContext context) {
-    var appState = context.watch<MyAppState>();
+    // var appState = context.watch<MyAppState>();
     Club club = widget.club;
-    bool joined = club.members.contains('Torri Porter');
     bool areCreator = club.creator == 'Torri Porter';
 
     return Scaffold(
@@ -33,22 +31,8 @@ class ClubDetailViewState extends State<ClubDetailView> {
           Text(club.name),
           Text(club.creator),
           Text(club.description),
-          !areCreator
-              ? ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      if (joined) {
-                        appState.removeMemberFromClub("Torri Porter", club);
-                        joined = false;
-                      } else {
-                        appState.addMemberToClub("Torri Porter", club);
-                        joined = true;
-                      }
-                    });
-                  },
-                  child: Text(joined ? "Leave" : "Join"),
-                )
-              : const Text('Welcome to your club'),
+          if (!areCreator) ClubMemberButton(club: club) 
+          else const Text('Welcome to your club'),
           club.type == 'private'
               ? Text(club.howToJoin)
               : const Text('Anyone can join this club')
