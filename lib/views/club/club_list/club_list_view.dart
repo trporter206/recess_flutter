@@ -21,13 +21,27 @@ class ClubListViewState extends State<ClubListView> {
     clubs = appState.clubs;
 
     return Scaffold(
-      body: ListView(
-        children: clubs.map((Club club) {
-          return Center(
-            child: ClubListItem(club: club),
-          );
-        }).toList(),
-      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Text(
+              'Clubs: ${clubs.length}',
+              style: const TextStyle(fontWeight: FontWeight.bold)
+              ),
+          ),
+          Expanded(
+            child: ListView(
+              children: clubs.map((Club club) {
+                return Center(
+                  child: ClubListItem(club: club),
+                );
+              }).toList(),
+            ),
+          ),
+        ],
+      )
     );
   }
 }

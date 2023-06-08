@@ -1,4 +1,4 @@
-import 'package:recess_flutter/models/user.dart';
+
 
 class Club {
   String id;
@@ -10,6 +10,7 @@ class Club {
   int numActivities;
   String type;
   String description;
+  String howToJoin;
 
   Club({
     required this.creator,
@@ -17,18 +18,19 @@ class Club {
     required this.sport,
     required this.type,
     required this.description,
-  }) : id = DateTime.now().millisecondsSinceEpoch.toString(),
-       members = [],
-       upcomingActivities = [],
-       numActivities = 0;
+    required this.howToJoin,
+  })  : id = DateTime.now().millisecondsSinceEpoch.toString(),
+        members = [],
+        upcomingActivities = [],
+        numActivities = 0;
 
-  void addMember(User user) {
-    if (!members.contains(user.id)) {
-      members.add(user.id);
+  void addMember(String userID) {
+    if (!members.contains(userID)) {
+      members.add(userID);
     }
   }
 
-  void removeMember(User user) {
-    members.remove(user.id);
+  void removeMember(String userID) {
+    members.remove(userID);
   }
 }

@@ -18,6 +18,7 @@ class CreateClubState extends State<CreateClubView> {
   String sport = '';
   String type = '';
   String description = '';
+  String howToJoin = '';
 
   @override
   Widget build(BuildContext context) {
@@ -93,6 +94,13 @@ class CreateClubState extends State<CreateClubView> {
                   description = value!;
                 },
               ),
+              type == 'private' ?
+              TextFormField(
+                decoration: const InputDecoration(labelText: 'How to Join'),
+                onSaved: (value) {
+                  description = value!;
+                },
+              ) : const Text('Anyone can join this club'),
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
@@ -103,6 +111,7 @@ class CreateClubState extends State<CreateClubView> {
                       sport: sport,
                       description: description,
                       creator: appState.currentUser.name,
+                      howToJoin: howToJoin
                     ));
                   }
                 },

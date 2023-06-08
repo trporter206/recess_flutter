@@ -3,19 +3,19 @@ import 'package:flutter/material.dart';
 import '../../../models/activity.dart';
 import '../../../models/user.dart';
 
-class PlayerProfileLink extends StatefulWidget {
+class ActivityHeader extends StatefulWidget {
   final Activity activity;
 
-  const PlayerProfileLink({
+  const ActivityHeader({
     super.key,
     required this.activity,
   });
 
   @override
-  State<PlayerProfileLink> createState() => _PlayerProfileLinkState();
+  State<ActivityHeader> createState() => _ActivityHeaderState();
 }
 
-class _PlayerProfileLinkState extends State<PlayerProfileLink> {
+class _ActivityHeaderState extends State<ActivityHeader> {
   @override
   Widget build(BuildContext context) {
     return Padding(

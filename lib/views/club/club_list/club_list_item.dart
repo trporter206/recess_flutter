@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../models/club.dart';
+import '../club_detail/club_detail_view.dart';
 
 class ClubListItem extends StatefulWidget {
   final Club club;
@@ -17,12 +18,12 @@ class ClubListItemState extends State<ClubListItem> {
     var club = widget.club;
 
     return InkWell(onTap: () {
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(
-      //     builder: (context) => ClubDetailView(club: club),
-      //   ),
-      // );
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ClubDetailView(club: club),
+        ),
+      );
     },
     child: Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),

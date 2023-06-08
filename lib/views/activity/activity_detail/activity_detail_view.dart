@@ -15,30 +15,6 @@ class ActivityDetailViewState extends State<ActivityDetailView> {
   // bool showingAlert = false;
 
   @override
-  void initState() {
-    super.initState();
-    // Call the equivalent of onAppear here
-  }
-
-  // void onAppear(Activity activity) {
-  //   getUserInfo(activity.creator);
-  //   getPlayerList(activity.players);
-  // }
-
-  // void getUserInfo(String id) {
-  //   // Firestore call to get user info goes here
-  //   notifyListeners();
-  // }
-
-  // void getPlayerList(List<String> playerIds) {
-  //   playerList = [];
-  //   for (var id in playerIds) {
-  //     // Firestore call to get user info goes here
-  //   }
-  //   notifyListeners();
-  // }
-
-  @override
   Widget build(BuildContext context) {
     Activity activity = widget.activity;
     bool joined = activity.players.contains("Torri Porter");
@@ -55,7 +31,7 @@ class ActivityDetailViewState extends State<ActivityDetailView> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            PlayerProfileLink(activity: activity),
+            ActivityHeader(activity: activity),
             ActivityDescription(activity: activity),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 8.0),

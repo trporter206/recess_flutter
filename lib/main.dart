@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recess_flutter/models/user.dart';
-import 'home.dart';
+import 'widgets/home.dart';
 import 'models/activity.dart';
 import 'models/club.dart';
 
@@ -24,7 +24,8 @@ class MyApp extends StatelessWidget {
             useMaterial3: true,
           ),
           home: const MyHomePage(title: 'Recess'),
-        ));
+        )
+    );
   }
 }
 
@@ -55,6 +56,14 @@ class MyAppState extends ChangeNotifier {
         name: 'Underdog Portland Basketball',
         sport: 'Basketball',
         type: 'private',
-        description: 'The official basketball club of underdog portland!')
+        description: 'The official basketball club of underdog portland!',
+        howToJoin: 'Send an email to torri@email.com'),
+    Club(
+        creator: 'Lauren Lanning',
+        name: 'Portland Womans Soccer Club',
+        sport: 'Soccer',
+        type: 'public',
+        description: 'The official soccer club of portland!',
+        howToJoin: '')
   ];
 }
