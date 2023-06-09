@@ -29,6 +29,16 @@ class MyApp extends StatelessWidget {
 }
 
 class MyAppState extends ChangeNotifier {
+  void addActivity(Activity activity) {
+    activities.add(activity);
+    notifyListeners();
+  }
+
+  void deleteActivity(Activity activity) {
+    activities.remove(activity);
+    notifyListeners();
+  }
+
   bool isPlayingActivity(String userId, Activity activity) {
     return activity.players.contains(userId);
   }

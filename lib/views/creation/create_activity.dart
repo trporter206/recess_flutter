@@ -22,7 +22,6 @@ class CreateActivityViewState extends State<CreateActivityView> {
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
-    var activities = appState.activities;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Create Activity'),
@@ -76,14 +75,16 @@ class CreateActivityViewState extends State<CreateActivityView> {
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
-                    activities.add(Activity(
+                    var newActivity = Activity(
                       title: title,
                       sport: sport,
                       date: date,
                       coordinates: coordinates,
                       description: description,
                       creator: appState.currentUser.name,
-                    ));
+                    );
+                    appState.addActivity(newActivity);
+                    Navigator.pop(context);
                   }
                 },
                 child: const Text('Save Activity'),

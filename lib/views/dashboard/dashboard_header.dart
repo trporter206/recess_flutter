@@ -1,53 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:recess_flutter/main.dart';
-import '../models/activity.dart';
-import '../models/user.dart';
-import '../widgets/buttons.dart';
-import 'activity/activity_list/activity_list_item.dart';
 
-class Dashboard extends StatefulWidget {
-  const Dashboard({Key? key}) : super(key: key);
-
-  @override
-  DashboardState createState() => DashboardState();
-}
-
-class DashboardState extends State<Dashboard> {
-  @override
-  Widget build(BuildContext context) {
-    var appState = context.watch<MyAppState>();
-    var scheduledActivities = appState.activities.where((activity) => activity.players.contains('Torri Porter')).toList();
-    
-    return Scaffold(
-        body: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const DashboardHeader(),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [CreateActivityButton(), CreateClubButton()],
-              ),
-              const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text('Your Scheduled Activities'),
-              ),
-              Column(
-                children: scheduledActivities.map((Activity activity) {
-                  return Center(
-                    child: ActivityListItem(activity: activity),
-                  );
-                }).toList(),
-              ),
-            ],
-          ),
-        )
-    );
-  }
-}
-
-
+import '../../main.dart';
+import '../../models/user.dart';
 
 class DashboardHeader extends StatefulWidget {
   const DashboardHeader({Key? key}) : super(key: key);
@@ -100,9 +55,9 @@ class DashboardHeaderState extends State<DashboardHeader> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      HeaderInfo(field: 'Tier ', value: '${user.tier}'),
-                      HeaderInfo(field: 'Points ', value: '${user.points}'),
-                      HeaderInfo(field: 'Rating ', value: user.rating),
+                      DashboardHeaderInfo(field: 'Tier ', value: '${user.tier}'),
+                      DashboardHeaderInfo(field: 'Points ', value: '${user.points}'),
+                      DashboardHeaderInfo(field: 'Rating ', value: user.rating),
                     ],
                   ),
                 )
@@ -115,8 +70,8 @@ class DashboardHeaderState extends State<DashboardHeader> {
   }
 }
 
-class HeaderInfo extends StatelessWidget {
-  const HeaderInfo({super.key, required this.field, required this.value});
+class DashboardHeaderInfo extends StatelessWidget {
+  const DashboardHeaderInfo({super.key, required this.field, required this.value});
 
   final String field;
   final String value;

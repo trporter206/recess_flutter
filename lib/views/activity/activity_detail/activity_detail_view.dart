@@ -21,7 +21,6 @@ class ActivityDetailViewState extends State<ActivityDetailView> {
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
     Activity activity = widget.activity;
-    bool joined = activity.players.contains("Torri Porter");
     bool areCreator = activity.creator == "Torri Porter";
 
     return Scaffold(
@@ -50,15 +49,23 @@ class ActivityDetailViewState extends State<ActivityDetailView> {
               }).toList()),
             ),
             ActivityDateView(activity: activity),
-            if (areCreator) ActivityActiveButton(activity: activity) 
-            else ActivityPlayerButton(activity: activity),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                // EditActivityButton(activity: activity),
-                // ActivityDeleteButton(activity: activity),
-              ],
-            ),
+            if (areCreator)
+              ActivityActiveButton(activity: activity)
+            else
+              ActivityPlayerButton(activity: activity),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                onPressed: () {
+                  appState.deleteActivity(activity);
+                  Navigator.pop(context);
+                },
+                child: const Text(
+                  'Delete',
+                  style: TextStyle(color: Colors.red),
+                )
+              ),
+            )
           ],
         ),
       ),
