@@ -6,6 +6,13 @@ import '../models/club.dart';
 import '../views/creation/create_activity.dart';
 import '../views/creation/create_club.dart';
 
+
+
+
+
+
+
+
 //button for navigating to activity creation screen
 class CreateActivityButton extends StatelessWidget {
   const CreateActivityButton({
@@ -14,16 +21,24 @@ class CreateActivityButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const CreateActivityView()),
-          );
-        },
-        child: const Text("Create Activity"));
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const CreateActivityView()),
+            );
+          },
+          child: const Text("Create Activity")),
+    );
   }
 }
+
+
+
+
+
 
 //button for navigating to club creation screen
 class CreateClubButton extends StatelessWidget {
@@ -33,16 +48,26 @@ class CreateClubButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const CreateClubView()),
-          );
-        },
-        child: const Text("Create Club"));
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const CreateClubView()),
+            );
+          },
+          child: const Text("Create Club")),
+    );
   }
 }
+
+
+
+
+
+
+
 
 class ClubMemberButton extends StatefulWidget {
   final Club club;
@@ -51,7 +76,6 @@ class ClubMemberButton extends StatefulWidget {
   @override
   ClubMemberButtonState createState() => ClubMemberButtonState();
 }
-
 class ClubMemberButtonState extends State<ClubMemberButton> {
   bool joined = false;
 
