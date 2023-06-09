@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recess_flutter/main.dart';
+import 'package:recess_flutter/widgets/buttons.dart';
 import '../../../models/activity.dart';
 import 'activity_detail_widgets.dart';
 
@@ -49,31 +50,8 @@ class ActivityDetailViewState extends State<ActivityDetailView> {
               }).toList()),
             ),
             ActivityDateView(activity: activity),
-            areCreator
-                ? ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        activity.currentlyActive = !activity.currentlyActive;
-                      });
-                    },
-                    child: Text(activity.currentlyActive ? "End" : "Start"),
-                  )
-                : ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        if (joined) {
-                          appState.removePlayerFromActivity(
-                              "Torri Porter", activity);
-                          joined = false;
-                        } else {
-                          appState.addPlayerToActivity(
-                              "Torri Porter", activity);
-                          joined = true;
-                        }
-                      });
-                    },
-                    child: Text(joined ? "Leave" : "Join"),
-                  ),
+            if (areCreator) ActivityActiveButton(activity: activity) 
+            else ActivityPlayerButton(activity: activity),
             const Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[

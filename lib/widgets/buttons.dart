@@ -2,16 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recess_flutter/main.dart';
 
+import '../models/activity.dart';
 import '../models/club.dart';
 import '../views/creation/create_activity.dart';
 import '../views/creation/create_club.dart';
-
-
-
-
-
-
-
 
 //button for navigating to activity creation screen
 class CreateActivityButton extends StatelessWidget {
@@ -27,18 +21,14 @@ class CreateActivityButton extends StatelessWidget {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const CreateActivityView()),
+              MaterialPageRoute(
+                  builder: (context) => const CreateActivityView()),
             );
           },
           child: const Text("Create Activity")),
     );
   }
 }
-
-
-
-
-
 
 //button for navigating to club creation screen
 class CreateClubButton extends StatelessWidget {
@@ -62,13 +52,6 @@ class CreateClubButton extends StatelessWidget {
   }
 }
 
-
-
-
-
-
-
-
 class ClubMemberButton extends StatefulWidget {
   final Club club;
   const ClubMemberButton({super.key, required this.club});
@@ -76,6 +59,7 @@ class ClubMemberButton extends StatefulWidget {
   @override
   ClubMemberButtonState createState() => ClubMemberButtonState();
 }
+
 class ClubMemberButtonState extends State<ClubMemberButton> {
   bool joined = false;
 
@@ -97,6 +81,66 @@ class ClubMemberButtonState extends State<ClubMemberButton> {
         });
       },
       child: Text(joined ? "Leave" : "Join"),
+    );
+  }
+}
+
+class ActivityPlayerButton extends StatefulWidget {
+  final Activity activity;
+  const ActivityPlayerButton({super.key, required this.activity});
+
+  @override
+  ActivityPlayerButtonState createState() => ActivityPlayerButtonState();
+}
+
+class ActivityPlayerButtonState extends State<ActivityPlayerButton> {
+  bool playing = false;
+
+  @override
+  Widget build(BuildContext context) {
+    var activity = widget.activity;
+    var appState = context.watch<MyAppState>();
+    playing = activity.players.contains(appState.currentUser.name);
+
+    return ElevatedButton(
+      onPressed: () {
+        setState(() {
+          if (playing) {
+            appState.removePlayerFromActivity(appState.currentUser.name, activity);
+          } else {
+            appState.addPlayerToActivity(appState.currentUser.name, activity);
+          }
+        });
+      },
+      child: Text(playing ? "Leave" : "Join"),
+    );
+  }
+}
+
+class ActivityActiveButton extends StatefulWidget {
+  final Activity activity;
+  const ActivityActiveButton({super.key, required this.activity});
+
+  @override
+  ActivityActiveButtonState createState() => ActivityActiveButtonState();
+}
+
+class ActivityActiveButtonState extends State<ActivityActiveButton> {
+  bool active = false;
+
+  @override
+  Widget build(BuildContext context) {
+    var activity = widget.activity;
+    var appState = context.watch<MyAppState>();
+    active = activity.currentlyActive;
+
+    return ElevatedButton(
+      onPressed: () {
+        setState(() {
+          appState.toggleActivityStatus(activity);
+        });
+      },
+      child: Text(active ? "End" : "Start"),
     );
   }
 }

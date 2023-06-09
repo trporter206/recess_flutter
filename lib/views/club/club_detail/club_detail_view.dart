@@ -33,9 +33,8 @@ class ClubDetailViewState extends State<ClubDetailView> {
           Text(club.description),
           if (!areCreator) ClubMemberButton(club: club) 
           else const Text('Welcome to your club'),
-          club.type == 'private'
-              ? Text(club.howToJoin)
-              : const Text('Anyone can join this club')
+          if (club.type == 'private') Text(club.howToJoin) 
+          else const Text('Anyone can join this club')
         ]),
       ),
     );

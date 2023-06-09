@@ -29,9 +29,17 @@ class MyApp extends StatelessWidget {
 }
 
 class MyAppState extends ChangeNotifier {
-  
+  bool isPlayingActivity(String userId, Activity activity) {
+    return activity.players.contains(userId);
+  }
+
   bool isMemberOfClub(String userId, Club club) {
     return club.members.contains(userId);
+  }
+
+  void toggleActivityStatus(Activity activity) {
+    activity.currentlyActive = !activity.currentlyActive;
+    notifyListeners();
   }
 
   void addPlayerToActivity(String playerId, Activity activity) {
