@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../models/activity.dart';
-import '../activity/activity_detail/activity_detail_view.dart';
+import '../../../models/activity.dart';
+import '../../activity/activity_detail/activity_detail_view.dart';
 
 class NextActivity extends StatefulWidget {
   final Activity activity;
@@ -24,12 +24,9 @@ class NextActivityState extends State<NextActivity> {
           ),
         );
       },
-      child: Container(
+      child: Card(
         margin: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(25),
-            boxShadow: const [BoxShadow(blurRadius: 1, color: Colors.black12)]),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
